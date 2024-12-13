@@ -1,12 +1,15 @@
-import express from 'express';
-import startServer from './libs/boot';
-import injectRoutes from './routes';
-import injectMiddlewares from './libs/middlewares';
+// server.js
 
-const server = express();
+const express = require('express');
+const app = express();
+const routes = require('./routes/index');
 
-injectMiddlewares(server);
-injectRoutes(server);
-startServer(server);
+const port = process.env.PORT || 5000;
 
-export default server;
+// use the routes
+app.use(routes);
+
+// start the server
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});
